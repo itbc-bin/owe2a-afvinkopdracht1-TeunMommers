@@ -19,7 +19,7 @@ def lees_inhoud(bestands_naam):
         bestand = open(bestands_naam, "r")
     except FileNotFoundError:
         print("Dit bestand is niet gevonden")
-        main()
+    
 
     headers = []
     seqs = []
@@ -42,8 +42,11 @@ def is_dna(seqs):
     return ja_nee
 
 def knipt(seq):
-    bestand = open("enzymen.txt")
-    bestand = bestand.readlines()
+    try:
+        bestand = open("enzymen.txt")
+        bestand = bestand.readlines()
+    except FileNotFoundError:
+        print("Vergelijkend bestand is niet gevonden")
     enzymen = []
     for line in bestand:
         line = line.replace("\n","").replace("^","").split()
@@ -59,4 +62,8 @@ def knipt(seq):
 
             
     return knip, knippend
-main()
+try:
+    main()
+except:
+    print("onbekende Error")
+    
